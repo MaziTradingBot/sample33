@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Tech Resale | iPhone 14 Pro</title>
+    <style>
+        /* Base Reset & Variables */
+        :root {
+            --primary: #111827;
+            --accent: #2563eb;
+            --bg: #f9fafb;
+            --surface: #ffffff;
+            --text-main: #1f2937;
+            --text-light: #6b7280;
+            --border: #e5e7eb;
+            --success: #059669;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.5;
+        }
+
+        /* Header */
+        header {
+            background: var(--surface);
+            padding: 1rem 5%;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.25rem;
+            letter-spacing: -0.5px;
+        }
+
+        /* Main PDP Layout */
+        .pdp-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 5%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        /* Image Gallery */
+        .gallery {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border);
+            height: 600px;
+        }
+
+        .gallery-placeholder {
+            width: 250px;
+            height: 450px;
+            background: linear-gradient(135deg, #e5e7eb, #f3f4f6);
+            border-radius: 30px;
+            border: 4px solid #d1d5db;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            font-weight: 500;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Product Details */
+        .product-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .breadcrumbs {
+            font-size: 0.875rem;
+            color: var(--text-light);
+        }
+
+        .product-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .price-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .price {
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        .bnpl {
+            font-size: 0.875rem;
+            color: var(--text-light);
+        }
+
+        /* Variant Selectors */
+        .section-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .selector-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .selector-btn {
+            padding: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--surface);
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.2s;
+        }
+
+        .selector-btn.active {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 1px var(--primary);
+        }
+
+        .selector-title {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .selector-desc {
+            font-size: 0.75rem;
+            color: var(--text-light);
+        }
+
+        /* Inspection Proof */
+        .inspection-box {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 8px;
+            padding: 1.25rem;
+        }
+
+        .inspection-header {
+            color: var(--success);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .inspection-list {
+            list-style: none;
+            font-size: 0.875rem;
+            color: var(--text-main);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .inspection-list li::before {
+            content: "✓ ";
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        /* Add to Cart & Warranty */
+        .add-to-cart {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 1.25rem;
+            border-radius: 8px;
+            font-size: 1.125rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .add-to-cart:hover {
+            background: #000000;
+        }
+
+        .warranty-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: -0.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-main);
+        }
+
+        .warranty-badges span {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        /* AI Chat Widget */
+        .chat-widget-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3);
+            cursor: pointer;
+            z-index: 1000;
+            transition: transform 0.2s;
+        }
+
+        .chat-widget-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .chat-window {
+            position: fixed;
+            bottom: 6rem;
+            right: 2rem;
+            width: 320px;
+            height: 400px;
+            background: var(--surface);
+            border-radius: 12px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border);
+            display: none; /* Hidden by default */
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 1000;
+        }
+
+        .chat-header {
+            background: var(--primary);
+            color: white;
+            padding: 1rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .close-chat {
+            cursor: pointer;
+            font-size: 1.25rem;
+        }
+
+        .chat-body {
+            padding: 1rem;
+            flex-grow: 1;
+            background: var(--bg);
+            overflow-y: auto;
+            font-size: 0.875rem;
+        }
+
+        .chat-msg {
+            background: var(--surface);
+            padding: 0.75rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            margin-bottom: 1rem;
+        }
+
+        .chat-input {
+            padding: 1rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .chat-input input {
+            flex-grow: 1;
+            padding: 0.5rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+        }
+
+        .chat-input button {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .pdp-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                margin: 1rem auto;
+            }
+            .gallery {
+                height: 400px;
+            }
+            .product-title {
+                font-size: 2rem;
+            }
+            .chat-window {
+                width: calc(100% - 4rem);
+                right: 2rem;
+            }
+            /* Sticky mobile cart button emulation */
+            .add-to-cart {
+                position: sticky;
+                bottom: 1rem;
+                z-index: 90;
+                box-shadow: 0 -10px 20px rgba(255,255,255,0.9);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">RE:TECH PREMIER</div>
+        <nav style="font-size: 0.875rem; font-weight: 500;">
+            Account | Cart (0)
+        </nav>
+    </header>
+
+    <main class="pdp-container">
+        <div class="gallery">
+            <div class="gallery-placeholder">
+                High-Res Device 360°
+            </div>
+        </div>
+
+        <div class="product-info">
+            <div class="breadcrumbs">Home / iPhones / iPhone 14 Pro</div>
+            
+            <div>
+                <h1 class="product-title">Apple iPhone 14 Pro</h1>
+                <div class="price-container">
+                    <span class="price">$749.00</span>
+                    <span class="bnpl">or 4 interest-free payments of $187.25 with <strong>Klarna</strong></span>
+                </div>
+            </div>
+
+            <div>
+                <div class="section-label">Select Condition</div>
+                <div class="selector-grid">
+                    <div class="selector-btn active">
+                        <span class="selector-title">Certified Like-New</span>
+                        <span class="selector-desc">Flawless screen & body. Indistinguishable from new.</span>
+                    </div>
+                    <div class="selector-btn">
+                        <span class="selector-title">Excellent</span>
+                        <span class="selector-desc">Micro-scratches visible only under bright light.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="section-label">Storage Capacity</div>
+                <div class="selector-grid" style="grid-template-columns: repeat(3, 1fr);">
+                    <div class="selector-btn active" style="text-align: center; padding: 0.75rem;">128GB</div>
+                    <div class="selector-btn" style="text-align: center; padding: 0.75rem;">256GB</div>
+                    <div class="selector-btn" style="text-align: center; padding: 0.75rem;">512GB</div>
+                </div>
+            </div>
+
+            <div class="inspection-box">
+                <div class="inspection-header">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                    Passed 30-Point Diagnostic Inspection
+                </div>
+                <ul class="inspection-list">
+                    <li>Battery Health > 90%</li>
+                    <li>Screen & Pixels Flawless</li>
+                    <li>Cameras & Lenses Clear</li>
+                    <li>Fully Unlocked & Wiped</li>
+                </ul>
+            </div>
+
+            <div>
+                <button class="add-to-cart">Add to Cart - $749.00</button>
+                <div class="warranty-badges">
+                    <span>🛡️ 12-Month Warranty</span>
+                    <span>📦 30-Day Free Returns</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="chat-widget-btn" onclick="toggleChat()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+    </div>
+
+    <div class="chat-window" id="aiChatWindow">
+        <div class="chat-header">
+            RE:TECH AI Assistant
+            <span class="close-chat" onclick="toggleChat()">&times;</span>
+        </div>
+        <div class="chat-body" id="chatBody">
+            <div class="chat-msg">
+                <strong>AI Support:</strong> Hello! I see you're looking at the iPhone 14 Pro. Do you have any questions about our "Certified Like-New" grading or the included 12-month warranty?
+            </div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="userInput" placeholder="Ask about the device..." onkeypress="handleEnter(event)">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        // Simple logic for Chat Widget
+        const chatWindow = document.getElementById('aiChatWindow');
+        const chatBody = document.getElementById('chatBody');
+        const userInput = document.getElementById('userInput');
+
+        function toggleChat() {
+            if (chatWindow.style.display === 'flex') {
+                chatWindow.style.display = 'none';
+            } else {
+                chatWindow.style.display = 'flex';
+                userInput.focus();
+            }
+        }
+
+        function sendMessage() {
+            const text = userInput.value.trim();
+            if (!text) return;
+
+            // Add user message
+            const userMsg = document.createElement('div');
+            userMsg.className = 'chat-msg';
+            userMsg.style.background = '#e0f2fe';
+            userMsg.style.borderColor = '#bae6fd';
+            userMsg.innerHTML = `<strong>You:</strong> ${text}`;
+            chatBody.appendChild(userMsg);
+
+            // Clear input
+            userInput.value = '';
+            chatBody.scrollTop = chatBody.scrollHeight;
+
+            // Simulate AI response
+            setTimeout(() => {
+                const aiMsg = document.createElement('div');
+                aiMsg.className = 'chat-msg';
+                aiMsg.innerHTML = `<strong>AI Support:</strong> Every device we sell comes with a verified battery health of over 90% and a comprehensive 12-month warranty covering any internal hardware defects.`;
+                chatBody.appendChild(aiMsg);
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }, 1000);
+        }
+
+        function handleEnter(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        }
+    </script>
+</body>
+</html>
